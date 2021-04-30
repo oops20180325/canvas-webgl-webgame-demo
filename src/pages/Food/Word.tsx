@@ -9,8 +9,13 @@ export default class Word {
     this.text = key
     this.x = Math.random() * w
     this.y = Math.random() * h
-    this.font = words[key] * 10 + 'px arial'
-    this.speed =
+    this.font = words[key] ? words[key]* 10 + 'px arial':Utils.random(20, 100)+ 'px arial'
+    if(words[key]){
+      this.speed =
       (words[key] > 5 ? words[key] - 2.5 : words[key]) + Utils.random(0, 5)
+    }else{
+      this.speed = Utils.random(1, 10)
+    }
+    
   }
 }

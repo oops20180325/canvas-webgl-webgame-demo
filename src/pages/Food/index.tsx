@@ -12,9 +12,10 @@ interface IFoodState {
 class Food extends React.Component<{}, IFoodState> {
   canvas
   wrapper
+  search
   words = {}
   interval
-
+  wordsAttr: any[] = []
   constructor(props) {
     super(props)
     this.state = {
@@ -23,7 +24,12 @@ class Food extends React.Component<{}, IFoodState> {
   }
 
   onSearch = v => {
-    console.log(v)
+    console.log(v);
+    const { offsetHeight: h, offsetWidth: w } = this.wrapper
+    const searchWord = new Word({ key:v,words:this.words,w,h });
+    this.wordsAttr.push(searchWord);
+    this.search.setValue('');
+    console.log(this.search)
   }
 
   componentDidMount() {
@@ -32,7 +38,6 @@ class Food extends React.Component<{}, IFoodState> {
 
   initCanvas = res => {
     this.words = res
-    const wordsAttr: any[] = []
     const { offsetHeight: h, offsetWidth: w } = this.wrapper
     const words = this.words
     const c = this.canvas.getContext('2d')
@@ -44,26 +49,26 @@ class Food extends React.Component<{}, IFoodState> {
 
     for (const key in this.words) {
       if (key) {
-        wordsAttr.push(new Word({ key, words, w, h }))
+        this.wordsAttr.push(new Word({ key, words, w, h }))
       }
     }
 
     const move = () => {
-      wordsAttr.forEach((_, i) => {
-        if (wordsAttr[i].x > w) {
-          wordsAttr[i].x = -wordsAttr[i].width
-          wordsAttr[i].y = Math.random() * h
+      this.wordsAttr.forEach((_, i) => {
+        if (this.wordsAttr[i].x > w) {
+          this.wordsAttr[i].x = -this.wordsAttr[i].width
+          this.wordsAttr[i].y = Math.random() * h
         } else {
-          wordsAttr[i].x += wordsAttr[i].speed
+          this.wordsAttr[i].x += this.wordsAttr[i].speed
         }
       })
     }
 
     const animation = () => {
-      wordsAttr.forEach((_, i) => {
-        c.font = wordsAttr[i].font
-        c.fillText(wordsAttr[i].text, wordsAttr[i].x, wordsAttr[i].y)
-        wordsAttr[i].width = c.measureText(wordsAttr[i].text).width
+      this.wordsAttr.forEach((_, i) => {
+        c.font = this.wordsAttr[i].font
+        c.fillText(this.wordsAttr[i].text, this.wordsAttr[i].x, this.wordsAttr[i].y)
+        this.wordsAttr[i].width = c.measureText(this.wordsAttr[i].text).width
         c.stroke()
       })
       move()
@@ -98,6 +103,7 @@ class Food extends React.Component<{}, IFoodState> {
             <>
               <div className="input">
                 <Search
+                  ref={el=>this.search = el}
                   placeholder="food you want"
                   enterButton="Add"
                   size="large"

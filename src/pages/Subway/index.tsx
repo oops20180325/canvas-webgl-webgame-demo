@@ -3,7 +3,7 @@ import { getScript } from '@utils'
 import Loader from '@cpt/Loader'
 import './index.less'
 
-const mapUrl = 'https://api.map.baidu.com/api?type=subway&v=1.0&ak=mS6bT1vyU9WYtFEqhUevBrhRji8CDmlO'
+const mapUrl = 'https://api.map.baidu.com/api?type=subway&v=1.0&ak=XQajQflQGbugS2XwiqcndR8FpoXGAtZC'
 
 const getSubwayCity = (cityname: string) => {
   const { BMapSub }: any = window
@@ -31,7 +31,7 @@ const Subway = () => {
   useEffect(() => {
     const { BMapSub }: any = window
     if (loadingMap) return
-    const subwaycity = getSubwayCity('上海')
+    const subwaycity = getSubwayCity('西安')
     const subway = new BMapSub.Subway('subway', subwaycity.citycode)
     subway.addControl({
       offset: new BMapSub.Size(10, 100),

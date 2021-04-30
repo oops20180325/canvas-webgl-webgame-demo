@@ -14,11 +14,11 @@ export default [
     icon: 'ts-app icon-subway',
     title: 'Subway'
   },
-  // {
-  //   route: 'loading-test',
-  //   icon: 'ts-app icon-doraemon',
-  //   title: 'Loader'
-  // },
+  {
+    route: 'loading-test',
+    icon: 'ts-app icon-doraemon',
+    title: 'Loader'
+  },
   {
     icon: 'ts-app icon-brand',
     title: 'Symbol',

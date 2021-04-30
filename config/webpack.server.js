@@ -15,10 +15,10 @@ module.exports = merge(common, {
     contentBase: path.join(__dirname, '../dist'),
     // 是否开启gzip压缩
     compress: false,
-    host: '0.0.0.0',
+    host: '127.0.0.1',
     port: 8080,
     // 是否开启热替换功能
-    // hot: true,
+    hot: true,
     // 是否自动打开页面,可以传入指定浏览器名字打开
     open: true,
     // 是否开启部分热替换功能
